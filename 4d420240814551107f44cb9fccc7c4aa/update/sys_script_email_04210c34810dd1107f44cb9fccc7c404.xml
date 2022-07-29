@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_email">
+    <sys_script_email action="INSERT_OR_UPDATE">
+        <name>x_cdltd_loaner_req_loaner_request_script_1</name>
+        <new_lines_to_html>false</new_lines_to_html>
+        <script><![CDATA[(function runMailScript( /* GlideRecord ITE*/ current, /* TemplatePrinter */ template,
+    /* Optional EmailOutbound */
+    email, /* Optional GlideRecord */ email_action,
+    /* Optional GlideRecord */
+    event) {
+
+    // Add your code here
+    if (current.item_type == 'cmdb_ci_computer') {
+        var request = new sn_ws.RESTMessageV2();
+        request.setEndpoint('https://adf-jul-247-test-010.lab.service-now.com/api/now/table/u_pasword_vault?sysparm_query=u_asset%3D' + current.cmdb_ci.asset_tag + '&sysparm_fields=u_password&sysparm_limit=1');
+        request.setHttpMethod('GET');
+
+        //Eg. UserName="admin", Password="admin" for this code sample.
+        var user = 'admin';
+        var password = 'adf-jul-247';
+
+        request.setBasicAuth(user, password);
+        request.setRequestHeader("Accept", "application/json");
+
+        var response = request.execute();
+		var obj = JSON.parse(response.getBody()); 
+        template.print(obj.result[0].u_password);
+    }
+
+
+})(current, template, email, email_action, event);]]></script>
+        <sys_class_name>sys_script_email</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-07-29 17:00:57</sys_created_on>
+        <sys_id>04210c34810dd1107f44cb9fccc7c404</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_name>x_cdltd_loaner_req_loaner_request_script_1</sys_name>
+        <sys_package display_value="Loaner Request" source="x_cdltd_loaner_req">4d420240814551107f44cb9fccc7c4aa</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Loaner Request">4d420240814551107f44cb9fccc7c4aa</sys_scope>
+        <sys_update_name>sys_script_email_04210c34810dd1107f44cb9fccc7c404</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-07-29 17:23:45</sys_updated_on>
+    </sys_script_email>
+</record_update>
