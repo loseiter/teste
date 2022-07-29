@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script_client">
+    <sys_script_client action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <applies_extended>false</applies_extended>
+        <condition/>
+        <description/>
+        <field>cmdb_ci</field>
+        <global>true</global>
+        <isolate_script>true</isolate_script>
+        <messages/>
+        <name>Set Loaner Location</name>
+        <order/>
+        <script><![CDATA[function onLoad() {
+if (g_form.getValue('location_to_beused') != '') {
+return;}
+ 
+var city = g_scratchpad.city;
+var country = g_scratchpad.country;
+
+ 
+    if (city && country){
+   g_form.setValue('location_to_beused', city + ', ' + country);
+}
+	else if (city){
+g_form.setValue('location_to_beused', city);
+}
+	else if (country){
+g_form.setValue('location_to_beused', country);
+ 
+}
+	if (city || country){
+g_form.showFieldMsg('location_to_beused', 'Value set automatically - you may override by editing', 'info');
+}}]]></script>
+        <sys_class_name>sys_script_client</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-07-28 14:44:04</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>690916d081c591107f44cb9fccc7c468</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>Set Loaner Location</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Loaner Request" source="x_cdltd_loaner_req">4d420240814551107f44cb9fccc7c4aa</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Loaner Request">4d420240814551107f44cb9fccc7c4aa</sys_scope>
+        <sys_update_name>sys_script_client_690916d081c591107f44cb9fccc7c468</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-07-28 14:49:21</sys_updated_on>
+        <table>x_cdltd_loaner_req_loaner_request</table>
+        <type>onLoad</type>
+        <ui_type>10</ui_type>
+        <view/>
+    </sys_script_client>
+</record_update>
